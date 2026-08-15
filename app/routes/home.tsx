@@ -1,15 +1,3 @@
-import type { Route } from "./+types/home";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Where to Watch" },
-    {
-      name: "description",
-      content: "Find out where to stream, rent, or buy any movie or show.",
-    },
-  ];
-}
-
 export default function Home() {
   return (
     <main className="min-h-screen bg-bg px-6 py-16">
