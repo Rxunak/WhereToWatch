@@ -85,4 +85,34 @@ This template comes with [Tailwind CSS](https://tailwindcss.com/) already config
 ---
 
 Built with ❤️ using React Router.
+
 # WhereToWatch
+
+# Folder Structure
+
+app/
+├── root.tsx
+├── routes.ts
+├── app.css
+│
+├── routes/ ← ONLY route modules (1 file per URL)
+│ ├── home.tsx → "/"
+│ ├── search.tsx → "/search"
+│ └── movie.$id.tsx            → "/movie/:id"   (or movie/$id.tsx, see note below)
+│
+├── components/ ← reusable, dumb/presentational UI
+│ ├── ui/ ← generic primitives: Button, Card, Input, Spinner
+│ └── movie/ ← domain-specific: MovieCard, MoviePoster, RatingBadge
+│
+├── features/ (optional) ← if a page gets complex, group its pieces here
+│ └── search/
+│ ├── SearchBar.tsx
+│ └── useSearchResults.ts
+│
+├── lib/ ← non-UI logic: API clients, formatting, constants
+│ ├── tmdb.ts (e.g. movie API wrapper)
+│ └── utils.ts
+│
+├── hooks/ ← shared custom hooks
+│
+└── types/ ← shared TS types/interfaces
