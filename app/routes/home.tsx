@@ -3,7 +3,10 @@ import type { Route } from "./+types/home";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Where to Watch" },
-    { name: "description", content: "Find out where to stream, rent, or buy any movie or show." },
+    {
+      name: "description",
+      content: "Find out where to stream, rent, or buy any movie or show.",
+    },
   ];
 }
 
@@ -17,7 +20,9 @@ export default function Home() {
 
       <div className="mt-8 max-w-sm rounded-lg border border-divider bg-surface p-4">
         <h2 className="text-h4 text-text">Dune: Part Two</h2>
-        <p className="text-small text-text-muted tnum mt-1">Film · 2016 · 1h 56m</p>
+        <p className="text-small text-text-muted tnum mt-1">
+          Film · 2016 · 1h 56m
+        </p>
         <div className="mt-3 flex items-center gap-2">
           <span
             className="h-2 w-2 rounded-full"
