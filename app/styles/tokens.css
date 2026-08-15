@@ -1,0 +1,109 @@
+/*
+ * Design tokens — mirrors "01 · Foundations / Tokens" from the Classical sheet.
+ * Neutral-100…900 and Accent-100…900 full ramps, and the exact shadow-sm/md/lg
+ * values, aren't captured here yet — only the labeled role colors were legible.
+ * Fill those in below once you have the precise values.
+ */
+
+@theme {
+  /* Fonts */
+  --font-heading: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-body: "Lora", ui-serif, Georgia, serif;
+
+  /* Color roles */
+  --color-bg: #f3f2f2;
+  --color-surface: #eae9e9;
+  --color-text: #201f1d;
+  --color-text-muted: #7d7b78; /* text @ 55% */
+  --color-accent: #b68235;
+  --color-divider: #d3d2d1; /* divider @ 16% */
+  --color-success: #7d5411; /* accent-700 */
+  --color-warning: #a06f24; /* accent-600 */
+  --color-error: #8c2f22;
+  --color-dark-bg: #191817;
+
+  /* Service brand accents — badge stroke/dot only, never a filled area */
+  --color-netflix: #e50914;
+  --color-prime-video: #00a8e1;
+  --color-hbo-max: #5b21b6;
+  --color-paramount-plus: #0064ff;
+  --color-tubi: #fbb033;
+  --color-youtube: #ff0033;
+  --color-disney-plus: #0f47b0;
+  --color-apple-tv-plus: #1c1c1e;
+  --color-hulu: #1ce783;
+  --color-peacock: #e4552a;
+  --color-pluto-tv: #0d1c3f;
+  --color-apple-tv: #4a4a4f;
+
+  /* Spacing — 4.6px base grid, so space-1..8 utilities (p-1, gap-4, etc.) match exactly */
+  --spacing: 0.2875rem; /* 4.6px */
+
+  /* Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 7px;
+}
+
+/* Type scale — composite tokens (size + leading + weight [+ tracking]) as real utility classes */
+@utility text-h1 {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  line-height: 1.12;
+  font-weight: 400;
+}
+@utility text-h2 {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  line-height: 1.12;
+  font-weight: 400;
+}
+@utility text-h3 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  line-height: 1.12;
+  font-weight: 600;
+}
+@utility text-h4 {
+  font-family: var(--font-heading);
+  font-size: 25px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+@utility text-h5 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+@utility text-h6 {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+@utility text-body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
+}
+@utility text-small {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+@utility text-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+/* Tabular figures — apply to kickers, prices, years, ratings, table cells */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
