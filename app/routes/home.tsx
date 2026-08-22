@@ -28,17 +28,22 @@ export default function Home() {
             ads, or rent - priced <br /> and grouped, no guessing.
           </p>
         </div>
-        <div className="border">
-          <InputGroup className="w-70">
+        <div className="border flex flex-col items-center gap-5">
+          <InputGroup className="w-160 h-15 rounded-sm">
             <InputGroupInput placeholder="Search a film or series..." />
             <InputGroupAddon>
-              <SearchIcon />
+              <SearchIcon className="text-amber-700" />
             </InputGroupAddon>
             <InputGroupAddon align="inline-end">
-              <InputGroupButton variant="secondary">Search</InputGroupButton>
+              <InputGroupButton
+                variant="outline"
+                className="h-10 w-20 border-amber-700 text-amber-700 hover:bg-amber-700/8 hover:text-amber-700 cursor-pointer"
+              >
+                Search
+              </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
-          <div>
+          <div className="flex items-center gap-2">
             <h1>Try</h1>
             <Button variant="outline">Arrival</Button>
           </div>
