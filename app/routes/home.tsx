@@ -12,18 +12,23 @@ import { Button } from "~/components/ui/button";
 
 export default function Home() {
   return (
-    <main className="bg-white">
+    <main className="bg-white border min-h-screen">
       <Navbar />
-      <section>
-        <div>
-          <h1>AVALABILITY IN THE UNITED STATES</h1>
-          <h2>Where can I watch it tonight?</h2>
-          <p>
-            One search across tweleve services. Subscription, free with ads, or
-            rent - priced and grouped, no guessing.
+      <section className="flex flex-col gap-5 h-auto">
+        <div className="flex flex-col items-center gap-2 pt-20">
+          <h1 className="text-amber-700 text-sm font-bold tracking-widest">
+            AVALABILITY IN THE UNITED STATES
+          </h1>
+          <h2 className="text-6xl text-center font-normal leading-18">
+            Where can I watch it <br />
+            tonight?
+          </h2>
+          <p className="text-center text-gray-500">
+            One search across tweleve services. <br /> Subscription, free with
+            ads, or rent - priced <br /> and grouped, no guessing.
           </p>
         </div>
-        <div>
+        <div className="border">
           <InputGroup className="w-70">
             <InputGroupInput placeholder="Search a film or series..." />
             <InputGroupAddon>
@@ -38,7 +43,7 @@ export default function Home() {
             <Button variant="outline">Arrival</Button>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex border">
           <div>
             <h1>TWELVE SERVICES</h1>
             <p>
