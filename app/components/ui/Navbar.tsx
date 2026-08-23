@@ -14,7 +14,7 @@ import { Button } from "./button";
 
 function Navbar() {
   return (
-    <main className="flex justify-between pl-10 pr-10 pt-5 pb-5 border h-auto bg-white">
+    <main className="flex justify-between pl-10 pr-10 pt-3 pb-3 border h-auto bg-white">
       <div className="flex items-center">
         <h1 className="text-h4 text-text">Where to Watch</h1>
       </div>
