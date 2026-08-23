@@ -13,11 +13,13 @@ import {
   homepageTryOptions,
   homepageFeatures,
 } from "./constants/homeConstants";
+import { useNavigate } from "react-router";
 
 export default function Home() {
+  let navigate = useNavigate();
   return (
     <main className="bg-white border min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="flex flex-col gap-8 h-auto">
         <div className="flex flex-col items-center gap-2 pt-20">
           <h1 className="text-amber-700 text-sm font-bold tracking-widest">
@@ -53,7 +55,12 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <h1>Try</h1>
             {homepageTryOptions.map((title) => (
-              <Button key={title} variant="outline" className="cursor-pointer">
+              <Button
+                key={title}
+                variant="outline"
+                className="cursor-pointer"
+                onClick={() => navigate("/search")}
+              >
                 {title}
               </Button>
             ))}
