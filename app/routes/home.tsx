@@ -9,7 +9,10 @@ import {
 } from "../components/ui/input-group";
 import { SearchIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { homepageTryOptions } from "./constants/homeConstants";
+import {
+  homepageTryOptions,
+  homepageFeatures,
+} from "./constants/homeConstants";
 
 export default function Home() {
   return (
@@ -29,7 +32,7 @@ export default function Home() {
             ads, or rent - priced <br /> and grouped, no guessing.
           </p>
         </div>
-        <div className="flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center gap-5 mb-8">
           <InputGroup className="w-160 h-15 rounded-sm pl-2 pr-2">
             <InputGroupInput
               placeholder="Search a film or series..."
@@ -50,30 +53,20 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <h1>Try</h1>
             {homepageTryOptions.map((title) => (
-              <Button key={title} variant="outline">
+              <Button key={title} variant="outline" className="cursor-pointer">
                 {title}
               </Button>
             ))}
           </div>
         </div>
-        <div className="flex border">
-          <div>
-            <h1>TWELVE SERVICES</h1>
-            <p>
-              Netflix, Disney+, Prime Video, Apple TV+, HBO Max, Hulu,
-              Paramount+, Peacock, Tubi, Pluto TV, YouTube, Apple TV.
-            </p>
-          </div>
-          <div>
-            <h1>GROUPED BY COST</h1>
-            <p>
-              Subscription first, then free with ads, then rent or buy with
-              prices in tabular figures.
-            </p>
-          </div>
-          <div>
-            <h1>KEPT ON YOUR DEVICE</h1>
-            <p>The watchlist needs no account. Nothing leaves this browser.</p>
+        <div className="p-1 w-full flex justify-center">
+          <div className="flex justify-between border-t-2 w-250">
+            {homepageFeatures.map((feature, index) => (
+              <div key={index} className="w-80 flex flex-col gap-1 mt-4">
+                <h1 className="font-bold text-sm">{feature.title}</h1>
+                <p className="text-sm text-gray-500">{feature.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
