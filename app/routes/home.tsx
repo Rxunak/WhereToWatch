@@ -9,12 +9,13 @@ import {
 } from "../components/ui/input-group";
 import { SearchIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import { homepageTryOptions } from "./constants/homeConstants";
 
 export default function Home() {
   return (
     <main className="bg-white border min-h-screen">
       <Navbar />
-      <section className="flex flex-col gap-5 h-auto">
+      <section className="flex flex-col gap-8 h-auto">
         <div className="flex flex-col items-center gap-2 pt-20">
           <h1 className="text-amber-700 text-sm font-bold tracking-widest">
             AVALABILITY IN THE UNITED STATES
@@ -28,11 +29,14 @@ export default function Home() {
             ads, or rent - priced <br /> and grouped, no guessing.
           </p>
         </div>
-        <div className="border flex flex-col items-center gap-5">
-          <InputGroup className="w-160 h-15 rounded-sm">
-            <InputGroupInput placeholder="Search a film or series..." />
+        <div className="flex flex-col items-center gap-5">
+          <InputGroup className="w-160 h-15 rounded-sm pl-2 pr-2">
+            <InputGroupInput
+              placeholder="Search a film or series..."
+              className="text-lg!"
+            />
             <InputGroupAddon>
-              <SearchIcon className="text-amber-700" />
+              <SearchIcon className="text-amber-700 size-5 mr-1" />
             </InputGroupAddon>
             <InputGroupAddon align="inline-end">
               <InputGroupButton
@@ -45,7 +49,11 @@ export default function Home() {
           </InputGroup>
           <div className="flex items-center gap-2">
             <h1>Try</h1>
-            <Button variant="outline">Arrival</Button>
+            {homepageTryOptions.map((title) => (
+              <Button key={title} variant="outline">
+                {title}
+              </Button>
+            ))}
           </div>
         </div>
         <div className="flex border">
