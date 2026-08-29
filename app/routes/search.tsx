@@ -9,9 +9,12 @@ function search() {
           <h1 className="text-amber-700 text-sm tracking-widest">RESULTS</h1>
           <h1 className="font-bold text-4xl">"Arrival"</h1>
         </div>
-        <div className="flex  h-10 rounded-md border">
+        <div className="flex items-center h-10 rounded-md">
           {searchFilterOptions.map((item, index) => (
-            <div key={index} className="border-r p-2 last:border-r-0">
+            <div
+              key={index}
+              className="text-sm p-2 font-medium border first:rounded-l-sm last:rounded-r-sm cursor-pointer hover:bg-gray-300/30 border-r-0 last:border-r-1"
+            >
               {item}
             </div>
           ))}
