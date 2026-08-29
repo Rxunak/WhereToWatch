@@ -1,14 +1,9 @@
-import { Input } from "../ui/input";
-import React from "react";
 import { Bookmark } from "lucide-react";
 import { SearchIcon } from "lucide-react";
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupButton,
   InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
 } from "../ui/input-group";
 import { Button } from "./button";
 
