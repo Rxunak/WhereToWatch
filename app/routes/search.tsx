@@ -13,7 +13,7 @@ function search() {
           {searchFilterOptions.map((item, index) => (
             <div
               key={index}
-              className="text-sm p-2 font-medium border first:rounded-l-sm last:rounded-r-sm cursor-pointer hover:bg-gray-300/30 border-r-0 last:border-r-1"
+              className="text-sm p-2 font-medium border first:rounded-l-sm last:rounded-r-sm cursor-pointer hover:bg-gray-300/30 border-r-0 last:border-r"
             >
               {item}
             </div>
