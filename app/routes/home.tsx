@@ -10,10 +10,18 @@ import {
   homepageTryOptions,
   homepageFeatures,
 } from "./constants/homeConstants";
-import { useNavigate } from "react-router";
+import { useNavigate, useLoaderData } from "react-router";
+// import { searchMultiple } from "~/lib/tmdb.server";
+
+// export async function loader() {
+//   const data = await searchMultiple("spider man");
+//   return data;
+// }
 
 export default function Home() {
   let navigate = useNavigate();
+
+  // const data = useLoaderData<typeof loader>();
   return (
     <main className="bg-white border min-h-screen">
       <section className="flex flex-col gap-8 h-auto">
@@ -55,7 +63,7 @@ export default function Home() {
                 key={title}
                 variant="outline"
                 className="cursor-pointer"
-                onClick={() => navigate("/search")}
+                onClick={() => navigate(`/search?q=${title}`)}
               >
                 {title}
               </Button>
