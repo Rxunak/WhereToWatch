@@ -6,12 +6,19 @@ import {
   InputGroupInput,
 } from "../ui/input-group";
 import { Button } from "./button";
+import { useNavigate } from "react-router";
 
 function Navbar() {
+  let navigate = useNavigate();
   return (
     <main className="flex justify-between pl-10 pr-10 pt-3 pb-3 border h-auto bg-white">
       <div className="flex items-center">
-        <h1 className="text-h4 text-text">Where to Watch</h1>
+        <h1
+          className="text-h4 text-text cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          Where to Watch
+        </h1>
       </div>
 
       <div className="flex gap-6">

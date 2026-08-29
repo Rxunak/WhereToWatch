@@ -1,10 +1,15 @@
 import React from "react";
 import { searchFilterOptions } from "./constants/searchConstants";
 import MovieCard from "~/components/movie/MovieCard";
+import { useNavigate } from "react-router";
 
 function search() {
+  const navigate = useNavigate();
   return (
-    <main className="flex flex-col gap-10 pl-10 pr-10 pt-8 pb-8 bg-white min-h-screen">
+    <main
+      className="flex flex-col gap-10 pl-10 pr-10 pt-8 pb-8 bg-white min-h-screen"
+      onClick={() => navigate("/movie")}
+    >
       <section className="flex justify-between items-center">
         <div className="flex flex-col gap-2">
           <h1 className="text-amber-700 text-sm tracking-widest">RESULTS</h1>
