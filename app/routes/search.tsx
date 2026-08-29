@@ -3,7 +3,7 @@ import { searchFilterOptions } from "./constants/searchConstants";
 
 function search() {
   return (
-    <main className="pl-10 pr-10 pt-8 pb-8">
+    <main className="flex flex-col gap-10 pl-10 pr-10 pt-8 pb-8">
       <section className="flex justify-between items-center">
         <div className="flex flex-col gap-2">
           <h1 className="text-amber-700 text-sm tracking-widest">RESULTS</h1>
@@ -20,7 +20,9 @@ function search() {
           ))}
         </div>
       </section>
-      <section></section>
+      <section>
+        <h1 className="text-gray-500">1 title</h1>
+      </section>
     </main>
   );
 }
