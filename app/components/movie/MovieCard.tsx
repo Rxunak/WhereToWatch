@@ -3,9 +3,9 @@ import { Bookmark } from "lucide-react";
 
 function MovieCard() {
   return (
-    <main className="flex flex-col gap-3 border rounded-sm w-70 p-3 outline-1">
+    <main className="flex flex-col gap-3 border rounded-sm w-60 p-3 outline-1 transition-transform duration-200 ease-out hover:shadow-lg hover:scale-105 cursor-pointer">
       <div className="border-10 border-gray-100/80 outline-1">
-        <div className="border h-90 bg-blue-200 flex items-end">
+        <div className="border h-70 bg-blue-200 flex items-end">
           <h1 className="p-2 text-xl font-bold">Arrival</h1>
         </div>
       </div>
