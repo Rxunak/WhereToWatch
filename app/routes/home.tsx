@@ -1,11 +1,8 @@
-import Navbar from "~/components/ui/Navbar";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
 } from "../components/ui/input-group";
 import { SearchIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
@@ -19,7 +16,6 @@ export default function Home() {
   let navigate = useNavigate();
   return (
     <main className="bg-white border min-h-screen">
-      {/* <Navbar /> */}
       <section className="flex flex-col gap-8 h-auto">
         <div className="flex flex-col items-center gap-2 pt-20">
           <h1 className="text-amber-700 text-sm font-bold tracking-widest">
