@@ -2,10 +2,7 @@ import React from "react";
 import { MoveLeft, Star } from "lucide-react";
 import { useNavigate } from "react-router";
 import { Button } from "~/components/ui/button";
-import {
-  movieDetails,
-  availabilityGroups,
-} from "./constants/movieConstants";
+import { movieDetails, availabilityGroups } from "./constants/movieConstants";
 
 function movie() {
   const navigate = useNavigate();
@@ -13,7 +10,7 @@ function movie() {
     <main className="flex flex-col gap-5 bg-white min-h-screen p-10">
       <section
         className="flex gap-3 text-amber-700 cursor-pointer"
-        onClick={() => navigate("/search")}
+        onClick={() => navigate(-1)}
       >
         <MoveLeft />
         <h1>Back to results</h1>
