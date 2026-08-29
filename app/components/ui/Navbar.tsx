@@ -31,7 +31,7 @@ function Navbar() {
         <div className="flex gap-1.5 items-center ">
           <div className="flex gap-2 items-center hover:text-amber-700 cursor-pointer">
             <Bookmark className="size-4" />
-            <p className="">Watchlist</p>
+            <p onClick={() => navigate("/watchList")}>Watchlist</p>
           </div>
 
           <span className="bg-amber-100 w-5 rounded-sm flex justify-center">
