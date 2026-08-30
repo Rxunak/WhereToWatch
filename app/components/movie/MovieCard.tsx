@@ -1,12 +1,14 @@
 import React from "react";
 import { Bookmark } from "lucide-react";
 import { noMoviePoster } from "./constants/movieCardConstants";
+import { useNavigate } from "react-router";
 
 type MovieCardsProps = {
   title: string;
   mediaType: string;
   releaseDate: string;
   imageSrc: string;
+  navigation: string;
 };
 
 function MovieCard({
@@ -14,13 +16,18 @@ function MovieCard({
   mediaType,
   releaseDate,
   imageSrc,
+  navigation,
 }: MovieCardsProps) {
+  const navigate = useNavigate();
   return (
-    <main className="flex flex-col justify-between gap-3 border rounded-sm w-60 p-3 outline-1 transition-transform duration-200 ease-out hover:shadow-lg hover:scale-105 cursor-pointer">
+    <main
+      className="flex flex-col justify-between gap-3 border rounded-sm w-60 p-3 outline-1 transition-transform duration-200 ease-out hover:shadow-lg hover:scale-105 cursor-pointer"
+      onClick={() => navigate(navigation)}
+    >
       <div className="border-10 border-gray-100/80 outline-1 h-full">
         <div className="border h-full w-full flex justify-center items-center">
           <img
-            src={imageSrc === noMoviePoster ? "public/noImage.png" : imageSrc}
+            src={imageSrc === noMoviePoster ? "noImage.png" : imageSrc}
             alt=""
             className={`${imageSrc === noMoviePoster ? "size-20" : ""} object-cover`}
           />

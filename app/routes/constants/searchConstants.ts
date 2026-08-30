@@ -1,6 +1,8 @@
 export const searchFilterOptions = [
   "All",
   "Subscription",
-  "Free",
-  "Rent / Buy",
+  "Rent",
+  "Buy",
 ] as const;
+
+export const REGION = "GB"
