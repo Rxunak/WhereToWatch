@@ -40,18 +40,19 @@ function search() {
       </section>
       <section className="flex flex-col gap-4">
         <h1 className="text-gray-500">{data.results.length} titles</h1>
-
-        {data.results
-          .filter((item: any) => item.media_type !== "person")
-          .map((item: any) => (
-            <MovieCard
-              key={item.id}
-              title={item.title ?? item.name}
-              mediaType={item.media_type}
-              releaseDate={item.release_date ?? item.first_air_date}
-              imageSrc={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-            />
-          ))}
+        <div className="flex flex-row flex-wrap gap-5 justify-center">
+          {data.results
+            .filter((item: any) => item.media_type !== "person")
+            .map((item: any) => (
+              <MovieCard
+                key={item.id}
+                title={item.title ?? item.name}
+                mediaType={item.media_type}
+                releaseDate={item.release_date ?? item.first_air_date}
+                imageSrc={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+              />
+            ))}
+        </div>
       </section>
     </main>
   );
