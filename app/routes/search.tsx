@@ -1,27 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { searchFilterOptions } from "./constants/searchConstants";
 import MovieCard from "~/components/movie/MovieCard";
-import { useNavigate, useLoaderData } from "react-router";
-import { searchMultiple } from "~/lib/tmdb.server";
+import { useLoaderData } from "react-router";
+import { searchMultiple, getWatchProviders } from "~/lib/tmdb.server";
+import { REGION } from "./constants/searchConstants";
 
 export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
   const query = url.searchParams.get("q") ?? "";
   const data = await searchMultiple(query);
-  return { data, query };
+
+  const results = data.results.filter(
+    (item: any) => item.media_type !== "person",
+  );
+
+  const withProviders = await Promise.all(
+    results.map(async (item: any) => ({
+      ...item,
+      providers: await getWatchProviders(item.id, item.media_type),
+    })),
+  );
+
+  return { data: withProviders, query };
+}
+
+function categorize(providers: any): string[] {
+  const region = providers?.results?.[REGION];
+  if (!region) return [];
+
+  const categories: string[] = [];
+  if (region.flatrate) categories.push("Subscription");
+  if (region.rent) categories.push("Rent");
+  if (region.buy) categories.push("Buy");
+
+  console.log(categories);
+
+  return categories;
 }
 
 function search() {
-  const navigate = useNavigate();
+  const [toggle, setToggle] = useState("All");
   const { data, query } = useLoaderData<typeof loader>();
 
-  console.log(data);
+  function updateToggle(items: string) {
+    setToggle(items);
+  }
 
   return (
-    <main
-      className="flex flex-col gap-10 pl-10 pr-10 pt-8 pb-8 bg-white min-h-screen"
-      onClick={() => navigate("/movie")}
-    >
+    <main className="flex flex-col gap-10 pl-10 pr-10 pt-8 pb-8 bg-white min-h-screen">
       <section className="flex justify-between items-center">
         <div className="flex flex-col gap-2">
           <h1 className="text-amber-700 text-sm tracking-widest">Results</h1>
@@ -31,7 +57,8 @@ function search() {
           {searchFilterOptions.map((item, index) => (
             <div
               key={index}
-              className="text-sm p-2 font-medium border first:rounded-l-sm last:rounded-r-sm cursor-pointer hover:bg-gray-300/30 border-r-0 last:border-r"
+              className={`${toggle === item ? "text-amber-700 border-amber-700 border-r-1" : ""} text-sm p-2 font-medium border first:rounded-l-sm last:rounded-r-sm cursor-pointer hover:bg-gray-300/30 border-r-0 last:border-r`}
+              onClick={() => updateToggle(item)}
             >
               {item}
             </div>
@@ -39,10 +66,16 @@ function search() {
         </div>
       </section>
       <section className="flex flex-col gap-4">
-        <h1 className="text-gray-500">{data.results.length} titles</h1>
+        <h1 className="text-gray-500">{data.length} titles</h1>
         <div className="flex flex-row flex-wrap gap-5 justify-center">
-          {data.results
-            .filter((item: any) => item.media_type !== "person")
+          {data
+            .filter(
+              (item: any) =>
+                item.media_type !== "person" &&
+                item.providers.results[REGION] &&
+                (toggle === "All" ||
+                  categorize(item.providers).includes(toggle)),
+            )
             .map((item: any) => (
               <MovieCard
                 key={item.id}
@@ -50,6 +83,7 @@ function search() {
                 mediaType={item.media_type}
                 releaseDate={item.release_date ?? item.first_air_date}
                 imageSrc={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                navigation={"/movie"}
               />
             ))}
         </div>
