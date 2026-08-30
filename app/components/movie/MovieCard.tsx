@@ -1,5 +1,6 @@
 import React from "react";
 import { Bookmark } from "lucide-react";
+import { noMoviePoster } from "./constants/movieCardConstants";
 
 type MovieCardsProps = {
   title: string;
@@ -15,10 +16,14 @@ function MovieCard({
   imageSrc,
 }: MovieCardsProps) {
   return (
-    <main className="flex flex-col gap-3 border rounded-sm w-60 p-3 outline-1 transition-transform duration-200 ease-out hover:shadow-lg hover:scale-105 cursor-pointer">
-      <div className="border-10 border-gray-100/80 outline-1">
-        <div className="border h-full w-full flex items-end">
-          <img src={imageSrc} alt="" className="object-cover" />
+    <main className="flex flex-col justify-between gap-3 border rounded-sm w-60 p-3 outline-1 transition-transform duration-200 ease-out hover:shadow-lg hover:scale-105 cursor-pointer">
+      <div className="border-10 border-gray-100/80 outline-1 h-full">
+        <div className="border h-full w-full flex justify-center items-center">
+          <img
+            src={imageSrc === noMoviePoster ? "public/noImage.png" : imageSrc}
+            alt=""
+            className={`${imageSrc === noMoviePoster ? "size-20" : ""} object-cover`}
+          />
         </div>
       </div>
       <div className="flex justify-between">

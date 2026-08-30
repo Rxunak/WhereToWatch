@@ -1,0 +1,1 @@
+export const noMoviePoster = "https://image.tmdb.org/t/p/w500null";
