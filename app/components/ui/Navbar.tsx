@@ -1,12 +1,7 @@
 import { Bookmark } from "lucide-react";
-import { SearchIcon } from "lucide-react";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "../ui/input-group";
 import { Button } from "./button";
 import { useNavigate } from "react-router";
+import SearchInput from "../shared/SearchInput";
 
 function Navbar() {
   let navigate = useNavigate();
@@ -22,12 +17,7 @@ function Navbar() {
       </div>
 
       <div className="flex gap-6">
-        <InputGroup className="w-70">
-          <InputGroupInput placeholder="Search a film or series..." />
-          <InputGroupAddon>
-            <SearchIcon />
-          </InputGroupAddon>
-        </InputGroup>
+        <SearchInput className="w-70" showButton={false} />
         <div className="flex gap-1.5 items-center ">
           <div className="flex gap-2 items-center hover:text-amber-700 cursor-pointer">
             <Bookmark className="size-4" />
