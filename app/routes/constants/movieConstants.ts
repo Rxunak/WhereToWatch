@@ -83,3 +83,21 @@ export const availabilityGroups: AvailabilityGroup[] = [
     ],
   },
 ];
+
+export const time_convert = (num:any) => {
+   // Calculate the number of hours by dividing num by 60 and rounding down
+  var hours = Math.floor(num / 60);  
+
+  // Calculate the remaining minutes by taking the remainder when dividing num by 60
+  var minutes = num % 60;
+
+  // Return the result as a string in the format "hours:minutes"
+  if(hours === 0){
+    return minutes + "m";   
+  }else{
+    return hours + "h " + minutes + "m";   
+
+  }
+  
+}
+
