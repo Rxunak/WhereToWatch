@@ -33,8 +33,6 @@ function categorize(providers: any): string[] {
   if (region.rent) categories.push("Rent");
   if (region.buy) categories.push("Buy");
 
-  console.log(categories);
-
   return categories;
 }
 

@@ -1,27 +1,14 @@
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "../components/ui/input-group";
-import { SearchIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import {
   homepageTryOptions,
   homepageFeatures,
 } from "./constants/homeConstants";
-import { useNavigate, useLoaderData } from "react-router";
-// import { searchMultiple } from "~/lib/tmdb.server";
-
-// export async function loader() {
-//   const data = await searchMultiple("spider man");
-//   return data;
-// }
+import { useNavigate } from "react-router";
+import SearchInput from "~/components/shared/SearchInput";
 
 export default function Home() {
   let navigate = useNavigate();
 
-  // const data = useLoaderData<typeof loader>();
   return (
     <main className="bg-white border min-h-screen">
       <section className="flex flex-col gap-8 h-auto">
@@ -39,23 +26,7 @@ export default function Home() {
           </p>
         </div>
         <div className="flex flex-col items-center gap-5 mb-8">
-          <InputGroup className="w-160 h-15 rounded-sm pl-2 pr-2">
-            <InputGroupInput
-              placeholder="Search a film or series..."
-              className="text-lg!"
-            />
-            <InputGroupAddon>
-              <SearchIcon className="text-amber-700 size-5 mr-1" />
-            </InputGroupAddon>
-            <InputGroupAddon align="inline-end">
-              <InputGroupButton
-                variant="outline"
-                className="h-10 w-20 border-amber-700 text-amber-700 hover:bg-amber-700/8 hover:text-amber-700 cursor-pointer"
-              >
-                Search
-              </InputGroupButton>
-            </InputGroupAddon>
-          </InputGroup>
+          <SearchInput className="w-160 h-15 rounded-sm pl-2 pr-2" />
           <div className="flex items-center gap-2">
             <h1>Try</h1>
             {homepageTryOptions.map((title) => (
