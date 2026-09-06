@@ -30,3 +30,8 @@ export function searchMultiple(query: string) {
 export function getWatchProviders(id: number, mediaType: "movie" | "tv") {
   return tmdbFetch(`/${mediaType}/${id}/watch/providers`);
 }
+
+export function getMovieDetails(id: number) {
+  return tmdbFetch(`/movie/${id}`);
+}
+

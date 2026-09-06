@@ -22,64 +22,81 @@ export interface AvailabilityGroup {
   key: string;
   title: string;
   caption: string;
-  offers: StreamingOffer[];
 }
 
 export const availabilityGroups: AvailabilityGroup[] = [
   {
-    key: "subscription",
+    key: "flatrate",
     title: "Subscription",
     caption: "Included with your plan",
-    offers: [
-      {
-        service: "Paramount+",
-        borderClass: "border-paramount-plus",
-        dotClass: "bg-paramount-plus",
-        note: "Streaming",
-        cta: "Watch",
-      },
-    ],
   },
   {
     key: "free",
     title: "Free",
     caption: "No subscription needed",
-    offers: [
-      {
-        service: "Tubi",
-        borderClass: "border-tubi",
-        dotClass: "bg-tubi",
-        note: "With ads",
-        cta: "Watch",
-      },
-      {
-        service: "Pluto TV",
-        borderClass: "border-pluto-tv",
-        dotClass: "bg-pluto-tv",
-        note: "With ads",
-        cta: "Watch",
-      },
-    ],
   },
   {
     key: "rent",
-    title: "Rent or buy",
+    title: "Rent",
     caption: "One-off payment",
-    offers: [
-      {
-        service: "YouTube",
-        borderClass: "border-youtube",
-        dotClass: "bg-youtube",
-        note: "$3.99 · HD",
-        cta: "$3.99",
-      },
-      {
-        service: "Apple TV",
-        borderClass: "border-apple-tv",
-        dotClass: "bg-apple-tv",
-        note: "$3.99 · 4K",
-        cta: "$3.99",
-      },
-    ],
   },
+
+  {
+    key: "buy",
+    title: "Buy",
+    caption: "One-off payment",
+  },
+
 ];
+
+export const providerLinks: Record<string, string> = {
+  Netflix: "https://www.netflix.com",
+  "Amazon Prime Video": "https://www.primevideo.com",
+  "Amazon Video": "https://www.amazon.co.uk/gp/video",
+  "Disney Plus": "https://www.disneyplus.com",
+  "Apple TV": "https://tv.apple.com",
+  "Apple TV Plus": "https://tv.apple.com",
+  "Google Play Movies": "https://play.google.com/store/movies",
+  YouTube: "https://www.youtube.com/feed/storefront",
+  "Sky Store": "https://www.skystore.com",
+  "Sky Go": "https://www.sky.com/watch/sky-go",
+  NOW: "https://www.nowtv.com",
+  "BBC iPlayer": "https://www.bbc.co.uk/iplayer",
+  ITVX: "https://www.itv.com",
+  "Channel 4": "https://www.channel4.com",
+  My5: "https://www.channel5.com/my5",
+  "Rakuten TV": "https://www.rakuten.tv",
+  Chili: "https://uk.chili.com",
+  "Microsoft Store": "https://www.microsoft.com/en-gb/store/movies-and-tv",
+  "Curzon Home Cinema": "https://www.curzonhomecinema.com",
+  MUBI: "https://mubi.com",
+  "BFI Player": "https://player.bfi.org.uk",
+  "Paramount Plus": "https://www.paramountplus.com",
+  Peacock: "https://www.peacocktv.com",
+  "HBO Max": "https://www.max.com",
+  Max: "https://www.max.com",
+  Hulu: "https://www.hulu.com",
+  Vudu: "https://www.vudu.com",
+};
+
+export const getProviderUrl = (providerName: string, fallbackUrl?: string) => {
+  return providerLinks[providerName] ?? fallbackUrl ?? "#";
+};
+
+export const time_convert = (num:any) => {
+   // Calculate the number of hours by dividing num by 60 and rounding down
+  var hours = Math.floor(num / 60);  
+
+  // Calculate the remaining minutes by taking the remainder when dividing num by 60
+  var minutes = num % 60;
+
+  // Return the result as a string in the format "hours:minutes"
+  if(hours === 0){
+    return minutes + "m";   
+  }else{
+    return hours + "h " + minutes + "m";   
+
+  }
+  
+}
+
