@@ -5,8 +5,8 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "../ui/input-group";
-import { useNavigate } from "react-router";
-import { SearchIcon } from "lucide-react";
+import { useNavigate, useNavigation } from "react-router";
+import { SearchIcon, LoaderCircle } from "lucide-react";
 import { cn } from "~/lib/utils";
 
 type SearchInputProps = {
@@ -17,6 +17,8 @@ type SearchInputProps = {
 function SearchInput({ className, showButton = true }: SearchInputProps) {
   const [value, setValue] = useState("");
   let navigate = useNavigate();
+  let navigation = useNavigation();
+  const isSearching = navigation.state === "loading";
 
   const handleValueChange = (e: any) => {
     setValue(e.target.value);
@@ -38,7 +40,11 @@ function SearchInput({ className, showButton = true }: SearchInputProps) {
           onKeyDown={(e) => (e.key === "Enter" ? handleSearch() : null)}
         />
         <InputGroupAddon>
-          <SearchIcon className="text-amber-700 size-5 mr-1" />
+          {isSearching ? (
+            <LoaderCircle className="text-amber-700 animate-spin size-5" />
+          ) : (
+            <SearchIcon className="text-amber-700 size-5 mr-1" />
+          )}
         </InputGroupAddon>
         {showButton && (
           <InputGroupAddon align="inline-end">
