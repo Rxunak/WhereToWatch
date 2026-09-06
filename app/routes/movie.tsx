@@ -2,7 +2,11 @@ import React from "react";
 import { MoveLeft, Star } from "lucide-react";
 import { data, useNavigate } from "react-router";
 import { Button } from "~/components/ui/button";
-import { movieDetails, availabilityGroups } from "./constants/movieConstants";
+import {
+  movieDetails,
+  availabilityGroups,
+  getProviderUrl,
+} from "./constants/movieConstants";
 import { getWatchProviders, getMovieDetails } from "~/lib/tmdb.server";
 import { useLoaderData } from "react-router";
 import { REGION } from "./constants/searchConstants";
@@ -27,8 +31,18 @@ function movie() {
   const { data: item } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   const hasProvidersInRegion = Boolean(item.providers.results[REGION]);
+  const providerForRegion = item.providers.results[REGION];
 
-  console.log(item.genres.map((genre: any) => genre.name));
+  console.log(providerForRegion);
+
+  const groups = availabilityGroups
+    .map((group: any) => ({
+      ...group,
+      offers: providerForRegion[group.key] ?? [],
+    }))
+    .filter((group: any) => group.offers.length > 0);
+
+  console.log("groups", groups);
 
   return (
     <main className="flex flex-col gap-5 bg-white min-h-screen p-10">
@@ -94,12 +108,12 @@ function movie() {
               <div className="flex items-baseline justify-between">
                 <h2 className="text-h5 text-text">Where to watch</h2>
                 <span className="text-caption text-gray-400">
-                  {movieDetails.region} · {movieDetails.updatedLabel}
+                  {"United Kingdom"}
                 </span>
               </div>
 
               <div className="flex flex-col gap-6">
-                {availabilityGroups.map((group) => (
+                {groups.map((group) => (
                   <div key={group.key} className="flex flex-col gap-3">
                     <div className="flex items-baseline gap-2 border-b pb-2">
                       <h3 className="font-semibold text-sm text-text">
@@ -109,31 +123,26 @@ function movie() {
                         {group.caption}
                       </span>
                     </div>
-                    <div className="flex flex-col">
-                      {group.offers.map((offer) => (
-                        <div
-                          key={offer.service}
-                          className="flex items-center justify-between border-b py-3 last:border-b-0"
-                        >
+                    <div className="flex flex-row justify-evenly">
+                      {group.offers.map((offer: any) => (
+                        <div className="flex items-center justify-between py-3 last:border-b-0">
                           <div className="flex items-center gap-3">
-                            <span
-                              className={`inline-flex items-center gap-2 rounded-sm border px-2.5 py-1 text-small ${offer.borderClass}`}
+                            <a
+                              href={getProviderUrl(
+                                offer.provider_name,
+                                providerForRegion.link
+                              )}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex flex-row cursor-pointer transition-transform duration-150 ease-out hover:scale-110 active:scale-95 focus-visible:outline-2 focus-visible:outline-amber-700 focus-visible:outline-offset-2 rounded-sm"
                             >
-                              <span
-                                className={`size-2 rounded-full ${offer.dotClass}`}
+                              <img
+                                src={`https://image.tmdb.org/t/p/w500${offer.logo_path}`}
+                                alt={offer.provider_name}
+                                className="size-15 transition-opacity duration-150 hover:opacity-80"
                               />
-                              {offer.service}
-                            </span>
-                            <span className="text-small text-gray-400">
-                              {offer.note}
-                            </span>
+                            </a>
                           </div>
-                          <Button
-                            variant="outline"
-                            className="border-amber-700 text-amber-700 hover:bg-amber-700/8 hover:text-amber-700 cursor-pointer rounded-sm"
-                          >
-                            {offer.cta}
-                          </Button>
                         </div>
                       ))}
                     </div>
