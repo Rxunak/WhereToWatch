@@ -77,6 +77,7 @@ function search() {
             .map((item: any) => (
               <MovieCard
                 key={item.id}
+                id={item.id}
                 title={item.title ?? item.name}
                 mediaType={item.media_type}
                 releaseDate={item.release_date ?? item.first_air_date}

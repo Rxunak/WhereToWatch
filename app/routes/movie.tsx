@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MoveLeft, Star } from "lucide-react";
 import { useNavigate } from "react-router";
 import { Button } from "~/components/ui/button";
@@ -7,6 +7,7 @@ import { getWatchProviders, getMovieDetails } from "~/lib/tmdb.server";
 import { useLoaderData } from "react-router";
 import { REGION } from "./constants/searchConstants";
 import { time_convert } from "./constants/movieConstants";
+import { isInWatchlist, toggleWatchlist, type SavedMovie } from "~/lib/watchList";
 
 export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
@@ -24,10 +25,27 @@ export async function loader({ request }: { request: Request }) {
 }
 
 function movie() {
-  const { data: item } = useLoaderData<typeof loader>();
+  const { data: item, movieId } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   const hasProvidersInRegion = Boolean(item.providers.results[REGION]);
   const providerForRegion = item?.providers?.results[REGION];
+
+  const savedMovie: SavedMovie = {
+    id: movieId,
+    title: item.original_title,
+    mediaType: item.media_type,
+    releaseDate: item.release_date,
+    imageSrc: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+  };
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    setIsSaved(isInWatchlist(savedMovie));
+  }, [movieId]);
+
+  const handleToggleWatchlist = () => {
+    setIsSaved(toggleWatchlist(savedMovie));
+  };
 
   console.log(providerForRegion);
 
@@ -63,8 +81,9 @@ function movie() {
             <Button
               variant="outline"
               className="border-amber-700 text-amber-700 hover:bg-amber-700/8 hover:text-amber-700 cursor-pointer rounded-sm"
+              onClick={handleToggleWatchlist}
             >
-              Add to watchlist
+              {isSaved ? "Remove from watchlist" : "Add to watchlist"}
             </Button>
             <Button variant="outline" className="rounded-sm">
               Share

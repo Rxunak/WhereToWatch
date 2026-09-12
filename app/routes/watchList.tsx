@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "~/components/movie/MovieCard";
-
-type SavedMovie = {
-  title: string;
-  mediaType: string;
-  releaseDate: string;
-  imageSrc: string;
-};
+import { getSavedMovies, type SavedMovie } from "~/lib/watchList";
 
 function watchList() {
   const [movieData, setMovieData] = useState<SavedMovie[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("MovieCardDetails");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setMovieData(Array.isArray(parsed) ? parsed : [parsed]);
-    }
+    setMovieData(getSavedMovies());
   }, []);
 
   return (
@@ -34,11 +24,12 @@ function watchList() {
           {movieData.map((movie) => (
             <MovieCard
               key={`${movie.title}-${movie.mediaType}`}
+              id={movie.id}
               title={movie.title}
               mediaType={movie.mediaType}
               releaseDate={movie.releaseDate}
               imageSrc={movie.imageSrc}
-              navigation="/movie"
+              navigation={`/movie?q=${encodeURIComponent(movie.title)}&id=${movie.id}`}
               onSavedChange={(isSaved) => {
                 if (!isSaved) {
                   setMovieData((prev) =>

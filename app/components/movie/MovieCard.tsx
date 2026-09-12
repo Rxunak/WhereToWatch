@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Bookmark } from "lucide-react";
 import { noMoviePoster } from "./constants/movieCardConstants";
 import { useNavigate } from "react-router";
+import { isInWatchlist, toggleWatchlist, type SavedMovie } from "~/lib/watchList";
 
 type MovieCardsProps = {
+  id: number;
   title: string;
   mediaType: string;
   releaseDate: string;
@@ -13,6 +15,7 @@ type MovieCardsProps = {
 };
 
 function MovieCard({
+  id,
   title,
   mediaType,
   releaseDate,
@@ -23,37 +26,16 @@ function MovieCard({
   const navigate = useNavigate();
   const [isSaved, setIsSaved] = useState(false);
 
-  const MC = {
-    title: title,
-    mediaType: mediaType,
-    releaseDate: releaseDate,
-    imageSrc: imageSrc,
-  };
-
-  const isSameMovie = (movie: typeof MC) =>
-    movie.title === MC.title && movie.mediaType === MC.mediaType;
-
-  const getSavedMovies = (): (typeof MC)[] => {
-    const stored = localStorage.getItem("MovieCardDetails");
-    const parsed = stored ? JSON.parse(stored) : [];
-    return Array.isArray(parsed) ? parsed : [parsed];
-  };
+  const movie: SavedMovie = { id, title, mediaType, releaseDate, imageSrc };
 
   useEffect(() => {
-    setIsSaved(getSavedMovies().some(isSameMovie));
+    setIsSaved(isInWatchlist(movie));
   }, [title, mediaType]);
 
   const toggleSaved = () => {
-    const saved = getSavedMovies();
-    const alreadySaved = saved.some(isSameMovie);
-
-    const next = alreadySaved
-      ? saved.filter((movie) => !isSameMovie(movie))
-      : [...saved, MC];
-
-    localStorage.setItem("MovieCardDetails", JSON.stringify(next));
-    setIsSaved(!alreadySaved);
-    onSavedChange?.(!alreadySaved);
+    const nowSaved = toggleWatchlist(movie);
+    setIsSaved(nowSaved);
+    onSavedChange?.(nowSaved);
   };
 
   return (
