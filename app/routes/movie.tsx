@@ -1,12 +1,8 @@
 import React from "react";
 import { MoveLeft, Star } from "lucide-react";
-import { data, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { Button } from "~/components/ui/button";
-import {
-  movieDetails,
-  availabilityGroups,
-  getProviderUrl,
-} from "./constants/movieConstants";
+import { availabilityGroups, getProviderUrl } from "./constants/movieConstants";
 import { getWatchProviders, getMovieDetails } from "~/lib/tmdb.server";
 import { useLoaderData } from "react-router";
 import { REGION } from "./constants/searchConstants";
@@ -31,16 +27,18 @@ function movie() {
   const { data: item } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   const hasProvidersInRegion = Boolean(item.providers.results[REGION]);
-  const providerForRegion = item.providers.results[REGION];
+  const providerForRegion = item?.providers?.results[REGION];
 
   console.log(providerForRegion);
 
-  const groups = availabilityGroups
-    .map((group: any) => ({
-      ...group,
-      offers: providerForRegion[group.key] ?? [],
-    }))
-    .filter((group: any) => group.offers.length > 0);
+  const groups = hasProvidersInRegion
+    ? availabilityGroups
+        .map((group: any) => ({
+          ...group,
+          offers: providerForRegion[group?.key] ?? [],
+        }))
+        .filter((group: any) => group.offers.length > 0)
+    : [];
 
   console.log("groups", groups);
 
@@ -130,7 +128,7 @@ function movie() {
                             <a
                               href={getProviderUrl(
                                 offer.provider_name,
-                                providerForRegion.link
+                                providerForRegion.link,
                               )}
                               target="_blank"
                               rel="noopener noreferrer"
