@@ -8,18 +8,23 @@ import { getSavedMovies } from "~/lib/watchList";
 function Navbar() {
   let navigate = useNavigate();
   let [numberOfSavedMovies, setNumberOfSavedMovies] = useState(0);
-  const [toggleMode, setToggleMode] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     setNumberOfSavedMovies(getSavedMovies().length);
   }, []);
 
-  const modeToggle = () => {
-    setToggleMode(!toggleMode);
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  const toggleDarkMode = () => {
+    document.documentElement.classList.toggle("dark");
+    setIsDark(!isDark);
   };
 
   return (
-    <main className="flex justify-between pl-10 pr-10 pt-3 pb-3 border h-auto bg-white">
+    <main className="flex justify-between pl-10 pr-10 pt-3 pb-3 border h-auto bg-white dark:bg-neutral-900">
       <div className="flex items-center">
         <h1
           className="text-h4 text-text cursor-pointer"
@@ -44,9 +49,9 @@ function Navbar() {
         <Button
           variant="outline"
           className="cursor-pointer w-15"
-          onClick={() => modeToggle()}
+          onClick={() => toggleDarkMode()}
         >
-          {toggleMode === false ? "Dark" : "Light"}
+          {isDark ? "Light" : "Dark"}
         </Button>
       </div>
     </main>
