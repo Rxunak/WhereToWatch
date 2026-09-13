@@ -82,7 +82,7 @@ function search() {
                 mediaType={item.media_type}
                 releaseDate={item.release_date ?? item.first_air_date}
                 imageSrc={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                navigation={`/movie?q=${encodeURIComponent(item.title)}&id=${item.id}`}
+                navigation={`/movie?q=${encodeURIComponent(item.title ?? item.name)}&id=${item.id}&type=${item.media_type}`}
               />
             ))}
         </div>

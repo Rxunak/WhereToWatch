@@ -3,7 +3,7 @@ import { MoveLeft, Star } from "lucide-react";
 import { useNavigate } from "react-router";
 import { Button } from "~/components/ui/button";
 import { availabilityGroups, getProviderUrl } from "./constants/movieConstants";
-import { getWatchProviders, getMovieDetails } from "~/lib/tmdb.server";
+import { getWatchProviders, getMovieDetails, getTVDetails } from "~/lib/tmdb.server";
 import { useLoaderData } from "react-router";
 import { REGION } from "./constants/searchConstants";
 import { time_convert } from "./constants/movieConstants";
@@ -13,12 +13,26 @@ export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
   const query = url.searchParams.get("q") ?? "";
   const movieId = Number(url.searchParams.get("id") ?? "");
+  const mediaType = url.searchParams.get("type") === "tv" ? "tv" : "movie";
 
-  const item = await getMovieDetails(movieId);
-  const providers = await getWatchProviders(movieId, "movie");
+  const item =
+    mediaType === "tv"
+      ? await getTVDetails(movieId)
+      : await getMovieDetails(movieId);
+  const providers = await getWatchProviders(movieId, mediaType);
+
+  const normalized =
+    mediaType === "tv"
+      ? {
+          ...item,
+          original_title: item.original_name ?? item.name,
+          release_date: item.first_air_date,
+          runtime: item.episode_run_time?.[0],
+        }
+      : item;
 
   return {
-    data: { ...item, media_type: "movie", providers },
+    data: { ...normalized, media_type: mediaType, providers },
     query,
     movieId,
   };

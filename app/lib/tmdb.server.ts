@@ -35,3 +35,7 @@ export function getMovieDetails(id: number) {
   return tmdbFetch(`/movie/${id}`);
 }
 
+export function getTVDetails(id: number) {
+  return tmdbFetch(`/tv/${id}`);
+}
+

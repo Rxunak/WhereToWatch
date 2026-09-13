@@ -29,7 +29,7 @@ function watchList() {
               mediaType={movie.mediaType}
               releaseDate={movie.releaseDate}
               imageSrc={movie.imageSrc}
-              navigation={`/movie?q=${encodeURIComponent(movie.title)}&id=${movie.id}`}
+              navigation={`/movie?q=${encodeURIComponent(movie.title)}&id=${movie.id}&type=${movie.mediaType}`}
               onSavedChange={(isSaved) => {
                 if (!isSaved) {
                   setMovieData((prev) =>
