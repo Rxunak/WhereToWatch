@@ -3,11 +3,19 @@ import { MoveLeft, Star } from "lucide-react";
 import { useNavigate } from "react-router";
 import { Button } from "~/components/ui/button";
 import { availabilityGroups, getProviderUrl } from "./constants/movieConstants";
-import { getWatchProviders, getMovieDetails, getTVDetails } from "~/lib/tmdb.server";
+import {
+  getWatchProviders,
+  getMovieDetails,
+  getTVDetails,
+} from "~/lib/tmdb.server";
 import { useLoaderData } from "react-router";
 import { REGION } from "./constants/searchConstants";
 import { time_convert } from "./constants/movieConstants";
-import { isInWatchlist, toggleWatchlist, type SavedMovie } from "~/lib/watchList";
+import {
+  isInWatchlist,
+  toggleWatchlist,
+  type SavedMovie,
+} from "~/lib/watchList";
 
 export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
@@ -61,8 +69,6 @@ function movie() {
     setIsSaved(toggleWatchlist(savedMovie));
   };
 
-  console.log(providerForRegion);
-
   const groups = hasProvidersInRegion
     ? availabilityGroups
         .map((group: any) => ({
@@ -71,8 +77,6 @@ function movie() {
         }))
         .filter((group: any) => group.offers.length > 0)
     : [];
-
-  console.log("groups", groups);
 
   return (
     <main className="flex flex-col gap-5 bg-white min-h-screen p-10">
@@ -89,7 +93,8 @@ function movie() {
             <img
               className="border h-90"
               src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-            ></img>
+              alt={`${item.original_title} poster`}
+            />
           </div>
           <div className="flex flex-col gap-3">
             <Button
@@ -126,7 +131,7 @@ function movie() {
               <span>{time_convert(item.runtime)}</span>
               <span className="flex items-center gap-1 text-amber-700">
                 <Star className="size-3.5 fill-amber-700" />
-                {item.popularity.toFixed(1)}
+                {item.vote_average.toFixed(1)}
               </span>
             </div>
             <p className="text-body text-gray-600 max-w-2xl">{item.overview}</p>
@@ -156,7 +161,10 @@ function movie() {
                     </div>
                     <div className="flex flex-row justify-evenly">
                       {group.offers.map((offer: any) => (
-                        <div className="flex items-center justify-between py-3 last:border-b-0">
+                        <div
+                          key={offer.provider_id}
+                          className="flex items-center justify-between py-3 last:border-b-0"
+                        >
                           <div className="flex items-center gap-3">
                             <a
                               href={getProviderUrl(
