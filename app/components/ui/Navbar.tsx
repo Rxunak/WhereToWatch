@@ -8,10 +8,15 @@ import { getSavedMovies } from "~/lib/watchList";
 function Navbar() {
   let navigate = useNavigate();
   let [numberOfSavedMovies, setNumberOfSavedMovies] = useState(0);
+  const [toggleMode, setToggleMode] = useState(false);
 
   useEffect(() => {
     setNumberOfSavedMovies(getSavedMovies().length);
   }, []);
+
+  const modeToggle = () => {
+    setToggleMode(!toggleMode);
+  };
 
   return (
     <main className="flex justify-between pl-10 pr-10 pt-3 pb-3 border h-auto bg-white">
@@ -36,8 +41,12 @@ function Navbar() {
             {numberOfSavedMovies}
           </span>
         </div>
-        <Button variant="outline" className="cursor-pointer">
-          Dark
+        <Button
+          variant="outline"
+          className="cursor-pointer w-15"
+          onClick={() => modeToggle()}
+        >
+          {toggleMode === false ? "Dark" : "Light"}
         </Button>
       </div>
     </main>
