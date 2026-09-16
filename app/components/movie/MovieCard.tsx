@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Bookmark } from "lucide-react";
 import { noMoviePoster } from "./constants/movieCardConstants";
 import { useNavigate } from "react-router";
-import { isInWatchlist, toggleWatchlist, type SavedMovie } from "~/lib/watchList";
+import {
+  isInWatchlist,
+  toggleWatchlist,
+  type SavedMovie,
+} from "~/lib/watchList";
 
 type MovieCardsProps = {
   id: number;
@@ -52,7 +56,7 @@ function MovieCard({
       <div className="flex justify-between">
         <div className="flex flex-col gap-1">
           <h1
-            className="text-xl font-bold hover:text-amber-700"
+            className="text-xl font-bold hover:text-amber-700 dark:text-white"
             onClick={() => navigate(navigation)}
           >
             {title}

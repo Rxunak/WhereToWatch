@@ -79,7 +79,7 @@ function movie() {
     : [];
 
   return (
-    <main className="flex flex-col gap-5 bg-white min-h-screen p-10">
+    <main className="flex flex-col gap-5 bg-white dark:bg-neutral-900 min-h-screen p-10">
       <section
         className="flex gap-3 text-amber-700 cursor-pointer"
         onClick={() => navigate(-1)}
