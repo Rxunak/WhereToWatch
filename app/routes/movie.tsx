@@ -104,7 +104,7 @@ function movie() {
             >
               {isSaved ? "Remove from watchlist" : "Add to watchlist"}
             </Button>
-            <Button variant="outline" className="rounded-sm">
+            <Button variant="outline" className="rounded-sm dark:text-white">
               Share
             </Button>
           </div>
@@ -122,7 +122,9 @@ function movie() {
               ))}
             </div>
 
-            <h1 className="text-h2 text-text">{item.original_title}</h1>
+            <h1 className="text-h2 text-text dark:text-white">
+              {item.original_title}
+            </h1>
             <div className="flex items-center gap-2 text-small text-gray-500">
               <span>{item.media_type}</span>
               <span>·</span>
@@ -134,7 +136,9 @@ function movie() {
                 {item.vote_average.toFixed(1)}
               </span>
             </div>
-            <p className="text-body text-gray-600 max-w-2xl">{item.overview}</p>
+            <p className="text-body text-gray-600 max-w-2xl dark:text-white">
+              {item.overview}
+            </p>
           </div>
 
           <div className="border-t" />
@@ -142,7 +146,9 @@ function movie() {
           {hasProvidersInRegion && (
             <div className="flex flex-col gap-6">
               <div className="flex items-baseline justify-between">
-                <h2 className="text-h5 text-text">Where to watch</h2>
+                <h2 className="text-h5 text-text dark:text-white">
+                  Where to watch
+                </h2>
                 <span className="text-caption text-gray-400">
                   {"United Kingdom"}
                 </span>
@@ -152,7 +158,7 @@ function movie() {
                 {groups.map((group) => (
                   <div key={group.key} className="flex flex-col gap-3">
                     <div className="flex items-baseline gap-2 border-b pb-2">
-                      <h3 className="font-semibold text-sm text-text">
+                      <h3 className="font-semibold text-sm text-text dark:text-white">
                         {group.title}
                       </h3>
                       <span className="text-caption text-gray-400">
